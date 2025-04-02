@@ -5,7 +5,7 @@ import { Separator } from "../ui/separator"
 const Social = () => {
   return (
     <>
-    <Separator />
+    <Separator className="-my-1" />
     <div className="grid grid-cols-2 gap-2">
         <Button className="h-11 " variant={'secondary'}>
             <FaGithub/>
