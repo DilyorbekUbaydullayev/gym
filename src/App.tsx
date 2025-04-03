@@ -3,6 +3,7 @@ import Navbar from "./components/shared/navbar"
 import Home from "./pages/home"
 import Auth from "./pages/auth"
 import Dashboard from "./pages/dashboard"
+import { Toaster } from "./components/ui/sonner"
 
 
 
@@ -16,6 +17,7 @@ function App() {
         <Route path="/auth" element={<Auth/>} />
         <Route path="/dashboard" element={<Dashboard/>} />
       </Routes>
+      <Toaster position="top-center" />
       
     </div>
   )

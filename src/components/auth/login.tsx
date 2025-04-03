@@ -18,12 +18,14 @@ import {
 } from "@/components/ui/alert"
 import { AlertCircle } from "lucide-react";
 import FillLoading from "../shared/fillLoading";
+import { useUserState } from "@/stores/user.store";
 
 const Login = () => {
   const [isLoading,setIsLoading] = useState(false);
   const [error,setError] = useState('');
   const navigate = useNavigate()
   const { setAuth } = useAuthState();
+  const {setUser} = useUserState()
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -36,6 +38,7 @@ const Login = () => {
      setIsLoading(true)
         try {
           const res = await signInWithEmailAndPassword(auth,email,password)
+          setUser(res.user)
           navigate('/')
         } catch (error) {
           const result = error as Error

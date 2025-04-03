@@ -15,12 +15,14 @@ import { useNavigate } from "react-router-dom";
 import { AlertCircle } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import FillLoading from "../shared/fillLoading";
+import { useUserState } from "@/stores/user.store";
 
 const Register = () => {
   const [isLoading,setIsLoading] = useState(false);
   const [error,setError] = useState('');
   const navigate = useNavigate()
   const { setAuth } = useAuthState();
+  const {setUser} = useUserState()
   const form = useForm<z.infer<typeof registerScheme>>({
     resolver: zodResolver(registerScheme),
     defaultValues: {
@@ -33,6 +35,7 @@ const Register = () => {
     setIsLoading(true)
     try {
       const res = await createUserWithEmailAndPassword(auth,email,password)
+      setUser(res.user)
       navigate('/')
     } catch (error) {
       const result = error as Error
