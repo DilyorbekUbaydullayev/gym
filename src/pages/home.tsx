@@ -3,9 +3,24 @@ import { featuredItems, programs } from "@/constants";
 import men from '@/assets/men.png'
 import { Card } from "@/components/ui/card";
 import { FaArrowRightLong } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useUserState } from "@/stores/user.store";
+import { CgGym } from "react-icons/cg";
+import { LogOut } from "lucide-react";
+import { auth } from "@/firebase";
 
 const Home = () => {
+    const {user,setUser} = useUserState()
+
+    const navigate = useNavigate();
+
+    const onLogout = () => {
+      auth.signOut().then(() => {
+        setUser(null);
+        navigate("/auth");
+      });
+    };
+
   return (
     <>
       <div className="w-full h-screen flex items-center mt-12">
@@ -16,11 +31,27 @@ const Home = () => {
             <p className="text-muted-foreground">
                 A huge selection of health and fitness content, healthy recipes and transformation stories to help you get fit and stay fit!
             </p>
-            <Link to={'/auth'}>
-            <Button className="w-fit mt-6 font-bold h-12" size={'lg'}>
-                Join club now
-            </Button>
-            </Link>
+            {user?(
+                <div className="flex gap-4">
+                    <Link to={'/dashboard'}>
+                    <Button className="w-fit mt-6 font-bold h-12">
+                        <span>Go to GYM</span>
+                        <CgGym className="w-5 h-5 ml-2"></CgGym>
+                    </Button>
+                    </Link>
+                    <Button onClick={onLogout} variant={'destructive'} className="w-fit mt-6 font-bold h-12">
+                        <span>Logout</span>
+                        <LogOut className="w-5 h-5 ml-2"></LogOut>
+                    </Button>
+                </div>
+            ):(
+<Link to={'/auth'}>
+<Button className="w-fit mt-6 font-bold h-12" size={'lg'}>
+    Join club now
+</Button>
+</Link>
+            )}
+            
             <div className="mt-24">
                 <p className="text-muted-foreground">AS FEATURED IN</p>
                 <div className="flex items-center gap-4 mt-2">
