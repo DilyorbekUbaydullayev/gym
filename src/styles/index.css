@@ -118,9 +118,5 @@
     @apply bg-background text-foreground;
   }
 }
-@layer base {
-  .container {
-    @apply w-full max-w-6xl mx-auto px-4;
-  }
-}
+
 
