@@ -1,6 +1,5 @@
 import { Routes,Route } from "react-router-dom"
 import Navbar from "./components/shared/navbar"
-import Home from "./pages/home"
 import Auth from "./pages/auth"
 import { Toaster } from "./components/ui/sonner"
 import React from "react"
@@ -8,6 +7,7 @@ import React from "react"
 
 
 const Dashboard = React.lazy(() => import('./pages/dashboard'));
+const Home = React.lazy(() => import('./pages/home'));
 
 function App() {
   return (
