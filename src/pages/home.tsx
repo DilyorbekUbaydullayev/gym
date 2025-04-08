@@ -10,8 +10,7 @@ import { LogOut } from "lucide-react";
 import { auth } from "@/firebase";
 
 const Home = () => {
-    const {user,setUser} = useUserState()
-
+    const {user, setUser} = useUserState()
     const navigate = useNavigate();
 
     const onLogout = () => {
@@ -23,59 +22,71 @@ const Home = () => {
 
   return (
     <>
-      <div className="w-full h-screen flex items-center mt-12">
-        <div className="max-w-xl ml-30 2xl:ml-70 h-full flex flex-col justify-center">
-            <h1 className="text-9xl font-semibold uppercase">
+      {/* Hero Section */}
+      <div className="w-full mt-20 min-h-screen flex flex-col gap-10 lg:flex-row items-center justify-center px-4 sm:px-6 md:px-8 py-8 lg:py-0">
+        <div className="w-full lg:w-1/2 flex flex-col justify-center lg:pl-6 xl:pl-12 2xl:pl-24 order-2 lg:order-1 mt-8 lg:mt-0 ">
+        <h1 className="min-md:text-9xl max-md:text-6xl font-semibold uppercase">
                 Workout with me
             </h1>
-            <p className="text-muted-foreground">
+            <p className="text-muted-foreground mt-4 max-w-lg">
                 A huge selection of health and fitness content, healthy recipes and transformation stories to help you get fit and stay fit!
             </p>
-            {user?(
-                <div className="flex gap-4">
+            {user ? (
+                <div className="flex flex-wrap gap-4 mt-6">
                     <Link to={'/dashboard'}>
-                    <Button className="w-fit mt-6 font-bold h-12">
+                    <Button className="w-fit font-bold h-12">
                         <span>Go to GYM</span>
                         <CgGym className="w-5 h-5 ml-2"></CgGym>
                     </Button>
                     </Link>
-                    <Button onClick={onLogout} variant={'destructive'} className="w-fit mt-6 font-bold h-12">
+                    <Button onClick={onLogout} variant={'destructive'} className="w-fit font-bold h-12">
                         <span>Logout</span>
                         <LogOut className="w-5 h-5 ml-2"></LogOut>
                     </Button>
                 </div>
-            ):(
-<Link to={'/auth'}>
-<Button className="w-fit mt-6 font-bold h-12" size={'lg'}>
-    Join club now
-</Button>
-</Link>
+            ) : (
+                <Link to={'/auth'} className="cursor-default">
+                <Button className="w-fit mt-6 font-bold h-12" size={'lg'}>
+                    Join club now
+                </Button>
+                </Link>
             )}
             
-            <div className="mt-24">
+            <div className="mt-12 md:mt-16 lg:mt-24">
                 <p className="text-muted-foreground">AS FEATURED IN</p>
-                <div className="flex items-center gap-4 mt-2">
-                     {featuredItems.map((Icon,index)=>(
-                        <Icon key={index} className="w-12 h-12" />
+                <div className="flex flex-wrap items-center gap-4 mt-2">
+                     {featuredItems.map((Icon, index) => (
+                        <Icon key={index} className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12" />
                      ))}
                 </div>
             </div>
         </div>
-        <img src={men} alt="#" className="w-1/4" />
+        <div className="w-full lg:w-1/3 flex justify-center order-1 lg:order-2">
+          <img 
+            src={men} 
+            alt="Fitness Model" 
+            loading="lazy"
+            className="w-1/2 sm:w-2/5 md:w-1/3 lg:w-4/5 object-contain" 
+            width={500}
+  height={600}
+          />
+        </div>
       </div>
-      <div className="container max-w-5xl mx-auto max-2xl:mt-10">
-        <h1 className="text-4xl">Not sure where to start?</h1>
+      
+      {/* Programs Section */}
+      <div className="container mx-auto px-4 sm:px-6 md:px-8 py-12 lg:py-16">
+        <h1 className="text-3xl md:text-4xl">Not sure where to start?</h1>
         <p className="mt-2 text-muted-foreground">
-            Programs offer day-to-day giudance on an interactive calendar to keep you on track
+            Programs offer day-to-day guidance on an interactive calendar to keep you on track
         </p>
-        <div className="grid grid-cols-3 gap-4 my-8">
-            {programs.map((item)=>(
-                <Card key={item.title} className="p-8 relative cursor-pointer group" >
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 my-8">
+            {programs.map((item) => (
+                <Card key={item.title} className="p-6 md:p-8 relative cursor-pointer group" >
                     <h3 className="-mb-3">{item.title}</h3>
-                    <p className="text-sm text-muted-foreground ">
+                    <p className="text-sm text-muted-foreground mt-4">
                         {item.descr}
                     </p>
-                    <Button size={'icon'} variant={'ghost'} className="absolute right-2 top-1/2 group-hover:translate-x-1 transition-transform ">
+                    <Button size={'icon'} variant={'ghost'} className="absolute right-2 top-1/2 group-hover:translate-x-1 transition-transform">
                         <FaArrowRightLong/>
                     </Button>
                 </Card>

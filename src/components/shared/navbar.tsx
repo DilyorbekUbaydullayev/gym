@@ -10,7 +10,7 @@ const Navbar = () => {
     const {user} = useUserState()
   return (
     <div className="w-full h-[10vh] border-b fixed inset-0 z-50 bg-background ">
-        <div className=" container mx-auto lg:max-w-5xl 2xl:max-w-screen-2xl 2xl:px-4 h-full flex justify-between items-center">
+        <div className=" container mx-auto lg:max-w-5xl 2xl:max-w-screen-2xl 2xl:px-4 h-full max-sm:px-6 flex justify-between items-center">
             <Link to={'/'}>
             <h1 className="text-2xl font-bold uppercase">workout</h1>
             </Link>
