@@ -13,7 +13,7 @@ import { toast } from "sonner";
 import FillLoading from "./fillLoading";
 import { QueryObserverResult } from "@tanstack/react-query";
 import { cn } from "@/lib/utils";
-
+import { useTimer } from "react-timer-hook";
 interface Props {
   task: ITask;
   onStartEditing: () => void;
@@ -23,6 +23,25 @@ interface Props {
 
 const TaskItem = ({ task, onStartEditing, onDelete, refetch }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
+
+  const expiryTimestamp = new Date();
+  expiryTimestamp.setSeconds(expiryTimestamp.getSeconds() + Number(task.timer));
+  const { seconds, minutes, start, pause, resume,restart } = useTimer({
+    expiryTimestamp,
+    autoStart: false,
+    onExpire: async () => {
+      const ref = doc(db, "tasks", task.id);
+      try {
+        await updateDoc(ref, {
+          status: "paused",
+          endTime: Date.now(),
+        });
+        refetch();
+      } catch (error) {
+        toast.error("Timer expiredda xatolik");
+      }
+    },
+  });
 
   const onStart = async () => {
     setIsLoading(true);
@@ -40,16 +59,16 @@ const TaskItem = ({ task, onStartEditing, onDelete, refetch }: Props) => {
     }
   };
 
-  const onPause = async() => {
+  const onPause = async () => {
     setIsLoading(true);
     const ref = doc(db, "tasks", task.id);
     try {
-      const elapsed = task.startTime?Date.now()-task.startTime:0;
-      const newTotalTime = (task.totalTime||0)+elapsed
+      const elapsed = task.startTime ? Date.now() - task.startTime : 0;
+      const newTotalTime = (task.totalTime || 0) + elapsed;
       await updateDoc(ref, {
         status: "paused",
         endTime: Date.now(),
-        totalTime:newTotalTime,
+        totalTime: newTotalTime,
       });
       refetch();
     } catch (error) {
@@ -63,19 +82,41 @@ const TaskItem = ({ task, onStartEditing, onDelete, refetch }: Props) => {
     switch (task.status) {
       case "unstarted":
         return (
-          <Button variant={"ghost"} size={"icon"} onClick={onStart}>
+          <Button
+            variant={"ghost"}
+            size={"icon"}
+            onClick={() => {
+              onStart(), start();
+            }}
+          >
             <CiPlay1 className="text-indigo-500 w-5 h-5" />
           </Button>
         );
       case "in_progress":
         return (
-          <Button variant={"ghost"} size={"icon"} onClick={onPause}>
+          <Button
+            variant={"ghost"}
+            size={"icon"}
+            onClick={() => {
+              onPause(), pause();
+            }}
+          >
             <CiPause1 className="text-indigo-500 w-5 h-5" />
           </Button>
         );
       case "paused":
         return (
-          <Button variant={"ghost"} size={"icon"}  onClick={onStart}>
+          <Button
+            variant={"ghost"}
+            size={"icon"}
+            onClick={() => {
+              onStart();
+              const newExpiry = new Date();
+              const initialSeconds = Number(task.timer); 
+              newExpiry.setSeconds(newExpiry.getSeconds() + initialSeconds);
+              restart(newExpiry, true);
+            }}
+          >
             <RxReload className="text-indigo-500 w-5 h-5" />
           </Button>
         );
@@ -83,21 +124,26 @@ const TaskItem = ({ task, onStartEditing, onDelete, refetch }: Props) => {
   };
 
   return (
-    <Card className="w-full p-4 shadow-md grid grid-cols-4 items-center gap-2 relative">
+    <Card className="w-full p-4 shadow-md grid grid-cols-12 items-center gap-4 relative">
       {isLoading && <FillLoading />}
-      <div className="flex gap-2 items-center  col-span-2 w-full">
+      <div className="flex gap-2 items-center  col-span-5  w-full ">
         <MdOutlineTaskAlt className="text-blue-500" />
         <p className="capitalize w-full">{task.title}</p>
       </div>
-      <div className="flex gap-1 items-center  col-span-1">
-        <HiStatusOnline  className={cn(
-          task.status==='unstarted'&&'text-blue-500',
-          task.status==='paused'&&'text-red-500',
-          task.status==='in_progress'&&'text-green-500'
-        )}/>
+      <div className="flex gap-1 items-center  col-span-4">
+        <HiStatusOnline
+          className={cn(
+            task.status === "unstarted" && "text-blue-500",
+            task.status === "paused" && "text-red-500",
+            task.status === "in_progress" && "text-green-500"
+          )}
+        />
         <span className="capitalize text-sm">{task.status}</span>
+        <span className="capitalize text-sm ms-2">
+          {String(minutes).padStart(2, "0")}:{String(seconds).padStart(2, "0")}
+        </span>
       </div>
-      <div className="flex gap-1 items-center justify-self-end col-span-1">
+      <div className="flex gap-1 items-center justify-self-end col-span-3">
         {renderBtns()}
         <Button variant={"secondary"} size={"icon"} onClick={onStartEditing}>
           <Edit2 className=" w-5 h-5" />

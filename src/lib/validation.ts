@@ -16,5 +16,6 @@ export const registerScheme= z.object({
 })
 
 export const taskSchema = z.object({
-    title:z.string().min(5)
+    title:z.string().min(5),
+    timer:z.string().min(2)
 })
