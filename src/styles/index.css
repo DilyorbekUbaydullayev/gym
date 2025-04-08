@@ -126,5 +126,10 @@
 .scroll-hidden::-webkit-scrollbar {
   display: none;
 }
-
+::-webkit-scrollbar{
+  width: 1px;
+} 
+::-webkit-scrollbar-thumb{
+  background:red;
+}
 
