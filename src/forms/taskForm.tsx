@@ -30,7 +30,6 @@ const TaskForm = ({title = '',timer='', handler,isEdit,onClose}:Props) => {
       const onSubmit = async (values:z.infer<typeof taskSchema>)=>{
         if(!user) return 
         setIsLoading(true)
-        const {title} = values
         const promise =handler(values).finally(() => setIsLoading(false));
 
         toast.promise(promise,{

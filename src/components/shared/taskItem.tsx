@@ -26,7 +26,7 @@ const TaskItem = ({ task, onStartEditing, onDelete, refetch }: Props) => {
 
   const expiryTimestamp = new Date();
   expiryTimestamp.setSeconds(expiryTimestamp.getSeconds() + Number(task.timer));
-  const { seconds, minutes, start, pause, resume,restart } = useTimer({
+  const { seconds, minutes, start, pause, resume,restart,} = useTimer({
     expiryTimestamp,
     autoStart: false,
     onExpire: async () => {
@@ -111,10 +111,13 @@ const TaskItem = ({ task, onStartEditing, onDelete, refetch }: Props) => {
             size={"icon"}
             onClick={() => {
               onStart();
-              const newExpiry = new Date();
-              const initialSeconds = Number(task.timer); 
-              newExpiry.setSeconds(newExpiry.getSeconds() + initialSeconds);
-              restart(newExpiry, true);
+              if (seconds > 0 || minutes > 0) {
+                resume();
+              } else {
+                const newExpiry = new Date();
+                newExpiry.setSeconds(newExpiry.getSeconds() + Number(task.timer));
+                restart(newExpiry, true);
+              }
             }}
           >
             <RxReload className="text-indigo-500 w-5 h-5" />
