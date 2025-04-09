@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { featuredItems, programs } from "@/constants";
-import men from '@/assets/men.png'
+import men from '@/assets/men.webp'
 import { Card } from "@/components/ui/card";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { Link, useNavigate } from "react-router-dom";
