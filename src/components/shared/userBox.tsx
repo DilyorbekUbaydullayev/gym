@@ -31,7 +31,7 @@ const UserBox = () => {
     <DropdownMenu >
       <DropdownMenuTrigger asChild>
         <Avatar className="cursor-pointer">
-          <AvatarImage src={user.photoURL!} />
+          <AvatarImage src={user.photoURL!}  alt="avatar" />
           <AvatarFallback className="uppercase">
             {user.email![0]}
           </AvatarFallback>
@@ -50,7 +50,7 @@ const UserBox = () => {
           <div className="flex items-center gap-x-2">
             <div className="rounded-md bg-secondary p-1">
               <Avatar>
-                <AvatarImage src={user.photoURL!} />
+                <AvatarImage src={user.photoURL!} alt="avatar" />
                 <AvatarFallback className="uppercase">
                   {user.email![0]}
                 </AvatarFallback>
