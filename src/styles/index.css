@@ -127,7 +127,7 @@
   display: none;
 }
 ::-webkit-scrollbar{
-  width: 1px;
+  width: 0px;
 } 
 ::-webkit-scrollbar-thumb{
   background:red;

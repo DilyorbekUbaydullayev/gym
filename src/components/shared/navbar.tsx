@@ -22,7 +22,7 @@ const Navbar = () => {
                 ))}
                 <ModeToggle/>
                 {user?(<UserBox/>):( <Link to={'/auth'}>
-                <Button variant={"secondary"}>Join Free</Button>
+                <Button aria-label="join free" variant={"secondary"}>Join Free</Button>
                 </Link>)}
                
             </div>

@@ -112,7 +112,7 @@ const Register = () => {
         />
         </div>
         <div>
-        <Button type="submit" className="w-full h-11 mt-1" disabled={isLoading}>Submit</Button>
+        <Button aria-label="submit" type="submit" className="w-full h-11 mt-1" disabled={isLoading}>Submit</Button>
         </div>
       </form>
     </Form>
