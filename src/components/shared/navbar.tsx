@@ -14,11 +14,11 @@ const Navbar = () => {
             <Link to={'/'}>
             <h1 className="text-2xl font-bold uppercase">workout</h1>
             </Link>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 ">
                 {navLinks.map((nav)=>(
-                    <a href={nav.path} key={nav.path} className="font-medium hover:underline">
+                    <Link to={nav.path} key={nav.label} className="font-medium hover:underline max-sm:hidden">
                         {nav.label}
-                    </a>
+                    </Link>
                 ))}
                 <ModeToggle/>
                 {user?(<UserBox/>):( <Link to={'/auth'}>
