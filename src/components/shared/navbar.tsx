@@ -1,5 +1,6 @@
 import { navLinks } from "@/constants"
 import { Button } from "../ui/button"
+import { ModeToggle } from "./mode-toggle"
 import { Link } from "react-router-dom"
 import { useUserState } from "@/stores/user.store"
 import UserBox from "./userBox"
@@ -19,7 +20,7 @@ const Navbar = () => {
                         {nav.label}
                     </Link>
                 ))}
-               
+                <ModeToggle/>
                 {user?(<UserBox/>):( <Link to={'/auth'}>
                 <Button aria-label="join free" variant={"secondary"}>Join Free</Button>
                 </Link>)}
