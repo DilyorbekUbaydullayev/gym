@@ -100,7 +100,7 @@ const Dashboard = () => {
           <div className="flex flex-col space-y-3 w-full max-sm:pt-15">
             <div className="w-full p-3 sm:p-4 rounded-md flex justify-between items-center bg-gradient-to-t from-background to-secondary">
               <div className="text-xl sm:text-2xl font-bold">Trainings</div>
-              <Button size="sm" onClick={() => setOpen(true)}>
+              <Button aria-label="add" size="sm" onClick={() => setOpen(true)}>
                 <BadgePlus className="h-4 w-4 mr-1 sm:mr-2" />
                 <span className="hidden sm:inline">Add</span>
               </Button>

@@ -38,11 +38,11 @@ const Social = () => {
       {isLoading && <FillLoading />}
       <Separator className="-my-1" />
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-        <Button className="h-11 " variant={"secondary"} disabled={isLoading} onClick={onGithub}>
+        <Button aria-label="icon github" className="h-11 " variant={"secondary"} disabled={isLoading} onClick={onGithub}>
           <FaGithub />
           <span>Sign in with Github</span>
         </Button>
-        <Button className="h-11" variant={"destructive"} disabled={isLoading} onClick={onGoogle}>
+        <Button aria-label="icon google" className="h-11" variant={"destructive"} disabled={isLoading} onClick={onGoogle}>
           <FaGoogle />
           <span>Sign in with Google</span>
         </Button>

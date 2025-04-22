@@ -82,7 +82,8 @@ const TaskItem = ({ task, onStartEditing, onDelete, refetch }: Props) => {
     switch (task.status) {
       case "unstarted":
         return (
-          <Button
+          <Button 
+          aria-label="start"
             variant={"ghost"}
             size={"icon"}
             onClick={() => {
@@ -95,6 +96,7 @@ const TaskItem = ({ task, onStartEditing, onDelete, refetch }: Props) => {
       case "in_progress":
         return (
           <Button
+          aria-label="pause"
             variant={"ghost"}
             size={"icon"}
             onClick={() => {
@@ -107,6 +109,7 @@ const TaskItem = ({ task, onStartEditing, onDelete, refetch }: Props) => {
       case "paused":
         return (
           <Button
+          aria-label="resume"
             variant={"ghost"}
             size={"icon"}
             onClick={() => {
@@ -148,10 +151,10 @@ const TaskItem = ({ task, onStartEditing, onDelete, refetch }: Props) => {
       </div>
       <div className="flex gap-1 items-center justify-self-end col-span-3">
         {renderBtns()}
-        <Button variant={"secondary"} size={"icon"} onClick={onStartEditing}>
+        <Button aria-label="edit icon" variant={"secondary"} size={"icon"} onClick={onStartEditing}>
           <Edit2 className=" w-5 h-5" />
         </Button>
-        <Button variant={"destructive"} size={"icon"} onClick={onDelete}>
+        <Button aria-label="trash icon" variant={"destructive"} size={"icon"} onClick={onDelete}>
           <Trash className=" w-5 h-5" />
         </Button>
       </div>
