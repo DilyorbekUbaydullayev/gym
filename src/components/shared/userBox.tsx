@@ -66,7 +66,7 @@ const UserBox = () => {
         </div>
         <DropdownMenuSeparator />
         <DropdownMenuGroup className=" px-1 pb-2">
-          <DropdownMenuItem className="cursor-pointer mt-2" onClick={onLogout}>
+          <DropdownMenuItem className="cursor-pointer mt-2" onClick={()=>navigate('/dashboard')}>
             <CgGym className="w-4 h-4 mr-2" />
             <span>Gym</span>
           </DropdownMenuItem>
