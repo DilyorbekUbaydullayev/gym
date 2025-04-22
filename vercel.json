@@ -1,12 +1,16 @@
 {
-    "version": 2,
-    "build": {
-      "env": {
-        "NPM_FLAGS": "--force"
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
       }
-    },
-    "rewrites": [
-      { "source": "/(.*)", "destination": "/" }
-    ]
-  }
-  
+    }
+  ],
+  "buildCommand": "npm install --force && npm run build",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/" }
+  ]
+}
