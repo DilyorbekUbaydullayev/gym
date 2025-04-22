@@ -1,11 +1,12 @@
 import { navLinks } from "@/constants"
 import { Button } from "../ui/button"
 import { Link } from "react-router-dom"
-
+import { useUserState } from "@/stores/user.store"
+import UserBox from "./userBox"
 
 
 const Navbar = () => {
-    
+    const {user} = useUserState()
   return (
     <div className="w-full h-[10vh] border-b fixed inset-0 z-50 bg-background ">
         <div className=" container mx-auto lg:max-w-5xl 2xl:max-w-screen-2xl 2xl:px-4 h-full max-sm:px-6 flex justify-between items-center">
@@ -18,9 +19,10 @@ const Navbar = () => {
                         {nav.label}
                     </Link>
                 ))}
-                <Link to={'/auth'}>
+               
+                {user?(<UserBox/>):( <Link to={'/auth'}>
                 <Button aria-label="join free" variant={"secondary"}>Join Free</Button>
-                </Link>
+                </Link>)}
                
             </div>
         </div>
