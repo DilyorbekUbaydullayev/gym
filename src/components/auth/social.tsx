@@ -37,7 +37,7 @@ const Social = () => {
     <>
       {isLoading && <FillLoading />}
       <Separator className="-my-1" />
-      <div className="grid grid-cols-2 gap-2">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
         <Button className="h-11 " variant={"secondary"} disabled={isLoading} onClick={onGithub}>
           <FaGithub />
           <span>Sign in with Github</span>

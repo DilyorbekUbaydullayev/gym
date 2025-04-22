@@ -28,9 +28,9 @@ const UserBox = () => {
   };
   
   return (
-    <DropdownMenu>
+    <DropdownMenu >
       <DropdownMenuTrigger asChild>
-        <Avatar>
+        <Avatar className="cursor-pointer">
           <AvatarImage src={user.photoURL!} />
           <AvatarFallback className="uppercase">
             {user.email![0]}
@@ -62,7 +62,7 @@ const UserBox = () => {
           </div>
         </div>
         <DropdownMenuSeparator />
-        <DropdownMenuGroup className=" px-1">
+        <DropdownMenuGroup className=" px-1 pb-2">
           <DropdownMenuItem className="cursor-pointer mt-2" onClick={onLogout}>
             <CgGym className="w-4 h-4 mr-2" />
             <span>Gym</span>
