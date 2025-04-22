@@ -29,14 +29,17 @@ const UserBox = () => {
   
   return (
     <DropdownMenu >
-      <DropdownMenuTrigger asChild>
-        <Avatar className="cursor-pointer">
-          <AvatarImage src={user.photoURL!}  alt="avatar" />
-          <AvatarFallback className="uppercase">
-            {user.email![0]}
-          </AvatarFallback>
-        </Avatar>
-      </DropdownMenuTrigger>
+     <DropdownMenuTrigger asChild>
+  <button type="button">
+    <Avatar className="cursor-pointer">
+      <AvatarImage src={user.photoURL!} alt="avatar" />
+      <AvatarFallback className="uppercase">
+        {user.email![0]}
+      </AvatarFallback>
+    </Avatar>
+  </button>
+</DropdownMenuTrigger>
+
       <DropdownMenuContent
         className="w-80 me-3"
         align="start"
